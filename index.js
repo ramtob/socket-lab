@@ -8,9 +8,14 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
 	var msg = "Server: socket " +  socket.id + " connected";
+	console.log(msg);
 	io.emit('chat message', msg);
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
+  });
+  socket.on('disconnect', function(){
+    msg = "Server: socket "+socket.id+" disconnected";
+	console.log(msg);
   });
 });
 
