@@ -21,7 +21,9 @@
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      var socket = io();
+	  var serverUrl = "http://localhost:3001";
+      var socket = io(serverUrl);
+	  //var socket = io();
       $('form').submit(function(){
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
@@ -39,7 +41,7 @@
         $('#messages').append($('<li>').text(msg));
       });
 	  
-	  var nsp = io('/nsp');
+	  var nsp = io(serverUrl + '/nsp');
 	  nsp.on('connect', function(){
 	    var msg = "Client: nsp socket connected";
         $('#messages').append($('<li>').text(msg));
